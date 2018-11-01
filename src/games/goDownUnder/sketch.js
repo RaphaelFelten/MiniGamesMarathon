@@ -15,13 +15,12 @@ function setup() {
     for (let i = 0; i < 5; i++) {
         obstacles.push(new Obstacle(500 - i * 100));
     }
-
 }
 
 function draw() {
     background(30);
     if (player.gameOver()) {
-        noLoop();
+        resetGame();
     }
     obstacles.forEach(o => {
         o.render();
@@ -46,4 +45,11 @@ function draw() {
     } else if (keyIsDown(RIGHT_ARROW)) {
         player.move(1);
     }
+}
+
+function resetGame() {
+    obstacles.forEach(o => {
+        o.vel.y = 1;
+        scoreDOM.textContent = '0';
+    });
 }
