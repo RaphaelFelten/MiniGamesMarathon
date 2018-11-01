@@ -49,6 +49,7 @@ function draw() {
 
 function resetGame() {
     obstacleSpeed = -1;
+    player.y = 20;
     score = 0;
     scoreDOM.textContent = score;
 }
