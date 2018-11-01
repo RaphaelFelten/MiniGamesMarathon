@@ -48,9 +48,7 @@ function draw() {
 }
 
 function resetGame() {
-    obstacles.forEach(o => {
-        o.vel.y = 1;
-        score = 0;
-        scoreDOM.textContent = score;
-    });
+    obstacleSpeed = -1;
+    score = 0;
+    scoreDOM.textContent = score;
 }
