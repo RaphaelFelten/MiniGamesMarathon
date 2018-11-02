@@ -36,6 +36,6 @@ class Player {
         this.pos.x += dir * this.horizontalSpeed;
     }
     gameOver() {
-        return this.pos.y <= 0 || this.pos.y >= 500;
+        return (this.pos.y <= 0 || this.pos.y >= 500);
     }
 }
