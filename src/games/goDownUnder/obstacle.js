@@ -1,23 +1,27 @@
 class Obstacle {
-    constructor(y, vel) {
-        this.pos = createVector(0, y || 500);
-        this.width = 400;
-        this.height = 20;
-        this.vel = createVector(0, obstacleSpeed);
+    constructor(_y) {
+        this.h = 30;
+        this.y = _y || height + this.h / 2;
+        this.gapWidth = width / 7;
+        this.gapX = floor(random(20, width - this.gapWidth - 20));
+        const options = {};
+        options.isStatic = true;
+        this.bodies = [];
+        this.bodies.push(Bodies.rectangle(this.gapX / 2, this.y, this.gapX, this.h, options));
+        this.bodies.push(Bodies.rectangle(width - ((width - this.gapX - this.gapWidth) / 2), this.y, width - this.gapX - this.gapWidth, this.h, options));
+        console.log(this.bodies);
+        World.add(engine.world, this.bodies);
         this.spawnedNew = false;
-        this.gap = {
-            width: 100,
-            pos: floor(random(20, this.width - 100 - 20))
-        }
     }
+
     render() {
         fill(255, 50, 70);
         noStroke();
-        rect(this.pos.x, this.pos.y, this.gap.pos, this.height);
-        rect(this.gap.pos + this.gap.width, this.pos.y, this.width - this.gap.pos - this.gap.width, this.height);
-    }
-    update() {
-        this.pos.y += this.vel.y;
+        this.bodies.forEach(body => {
+            beginShape();
+            body.vertices.forEach(v => vertex(v.x, v.y));
+            endShape(CLOSE);
+        });
     }
     offScreen() {
         return this.pos.y <= -this.height;
