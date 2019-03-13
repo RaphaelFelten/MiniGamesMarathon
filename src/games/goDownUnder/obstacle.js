@@ -15,13 +15,13 @@ class Obstacle {
     }
 
     render() {
-        fill(255, 50, 70);
+        fill(obstacleColor);
         noStroke();
         this.bodies.forEach(body => {
-            /*beginShape();
+            image(imgObstacle, body.vertices[0].x, body.vertices[0].y, body.vertices[1].x - body.vertices[0].x, this.h);
+            beginShape();
             body.vertices.forEach(v => vertex(v.x, v.y));
-            endShape(CLOSE);*/
-            image(imgObstacle, body.vertices[0].x, body.vertices[0].y, body.vertices[1].x, this.h);
+            endShape(CLOSE);
         });
     }
     offScreen() {

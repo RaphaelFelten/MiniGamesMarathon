@@ -8,12 +8,12 @@ const Engine = Matter.Engine,
 
 let engine,
     score = 0,
-    vertSpeed = 2,
+    vertSpeed = 3,
     vertOff = 1,
-    backgroundColor,
     player,
     playerSpeed = 0.002,
     obstacles = [],
+    obstacleColor,
     obstacleDistanceMin = 80,
     obstacleDistanceMax = 200,
     boundLeft,
@@ -25,13 +25,13 @@ let engine,
 function preload() {
     imgBackground = loadImage('src/games/goDownUnder/background.jpg');
     imgPlayer = loadImage('src/games/goDownUnder/spongebob.png');
-    imgObstacle = loadImage('src/games/goDownUnder/wall.jpg');
+    imgObstacle = loadImage('src/games/goDownUnder/obstacle.jpg');
 }
 
 function setup() {
     createCanvas(canvasWidth, canvasHeight);
     engine = Engine.create();
-    backgroundColor = [random(1, 255), random(1, 255), random(1, 255), 50];
+    obstacleColor = [random(1, 255), random(1, 255), random(1, 255), 70];
     const boundOptions = {};
     boundOptions.isStatic = true;
     boundLeft = Bodies.rectangle(-15, height / 2, 30, height, boundOptions);
@@ -44,8 +44,8 @@ function setup() {
 }
 
 function draw() {
+    background(0);
     image(imgBackground, 0, 0, canvasWidth, canvasHeight);
-    background(backgroundColor);
     translate(0, -vertOff);
     Engine.update(engine);
     Body.translate(boundLeft, {
@@ -64,14 +64,14 @@ function draw() {
             score++;
             if (score % 10 == 0) obstacleDistanceMax -= 5;
             if (score % 50 == 0) {
-                vertSpeed += 0.5;
-                backgroundColor = [random(1, 255), random(1, 255), random(1, 255), 50];
+                vertSpeed += 1;
+                obstacleColor = [random(1, 255), random(1, 255), random(1, 255), 70];
             }
             scoreDOM.textContent = score;
         }
         o.render();
     });
-    vertOff += vertSpeed;
+    if (frameCount % 2 == 0) vertOff += vertSpeed;
     if (keyIsDown(LEFT_ARROW)) {
         player.move(-playerSpeed);
     } else if (keyIsDown(RIGHT_ARROW)) {
