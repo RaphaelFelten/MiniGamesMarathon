@@ -62,7 +62,7 @@ function draw() {
             o.spawnedNew = true;
             spawnObstacle();
             score++;
-            if (score % 10 == 0) obstacleDistanceMax -= 5;
+            if (score % 10 == 0) obstacleDistanceMax -= 3;
             if (score % 50 == 0) {
                 vertSpeed += 1;
                 obstacleColor = [random(1, 255), random(1, 255), random(1, 255), 70];
