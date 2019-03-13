@@ -57,11 +57,19 @@ function draw() {
         x: 0,
         y: vertSpeed
     });
+    if (player.body.position.y + player.r <= vertOff || player.body.position.y - player.r >= vertOff + canvasHeight) {
+        noLoop();
+        document.write('Game Over, reload page to try again');
+    }
     player.render();
     obstacles.forEach(o => {
         if (o.bodies[0].position.y <= vertOff && o.spawnedNew === false) {
             o.spawnedNew = true;
             spawnObstacle();
+            setTimeout(() => {
+                World.remove(engine.world, o.bodies);
+                obstacles = obstacles.filter(obs => obs !== o);
+            }, 1000);
             score++;
             if (score % 10 == 0) obstacleDistanceMax -= 3;
             if (score % 50 == 0) {
