@@ -64,7 +64,7 @@ function draw() {
             score++;
             if (score % 10 == 0) obstacleDistanceMax -= 5;
             if (score % 50 == 0) {
-                vertSpeed += 0.25;
+                vertSpeed += 0.5;
                 backgroundColor = [random(1, 255), random(1, 255), random(1, 255), 50];
             }
             scoreDOM.textContent = score;
