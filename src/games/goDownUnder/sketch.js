@@ -59,7 +59,7 @@ function draw() {
     });
     if (player.body.position.y + player.r <= vertOff || player.body.position.y - player.r >= vertOff + canvasHeight) {
         noLoop();
-        document.write('Game Over, reload page to try again');
+        document.write('Game Over at ' + score + ' points, reload page to try again');
     }
     player.render();
     obstacles.forEach(o => {
