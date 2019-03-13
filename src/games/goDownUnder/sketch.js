@@ -29,7 +29,8 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(canvasWidth, canvasHeight);
+    let canvas = createCanvas(canvasWidth, canvasHeight);
+    canvas.elt.style.left = ((window.innerWidth - canvasWidth) / 2) + 'px';
     engine = Engine.create();
     obstacleColor = [random(1, 255), random(1, 255), random(1, 255), 70];
     const boundOptions = {};
