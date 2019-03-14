@@ -24,7 +24,8 @@ let engine,
 
 function preload() {
     imgBackground = loadImage('src/games/goDownUnder/background.jpg');
-    imgPlayer = loadImage('src/games/goDownUnder/spongebob.png');
+    //imgPlayer = loadImage('src/games/goDownUnder/spongebob.png');
+    imgPlayer = loadImage('src/games/goDownUnder/mrpoopybutthole.png');
     imgObstacle = loadImage('src/games/goDownUnder/obstacle.jpg');
 }
 
