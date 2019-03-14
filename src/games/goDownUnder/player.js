@@ -8,9 +8,9 @@ class Player {
         World.add(engine.world, this.body);
     }
     render() {
-        fill(150, 200, 255);
-        noStroke();
-        ellipse(this.body.position.x, this.body.position.y, this.r * 2);
+        //fill(150, 200, 255);
+        //noStroke();
+        //ellipse(this.body.position.x, this.body.position.y, this.r * 2);
         push();
         imageMode(CENTER);
         translate(this.body.position.x, this.body.position.y);
