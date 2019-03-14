@@ -15,7 +15,7 @@ class Player {
         imageMode(CENTER);
         translate(this.body.position.x, this.body.position.y);
         rotate(this.body.angle);
-        image(imgPlayer, 0, 0, this.r * 2, this.r * 2);
+        image(imgPlayer, 0, 0, this.r * 2-5, this.r * 2-5);
         pop();
     }
     move(dir) {
