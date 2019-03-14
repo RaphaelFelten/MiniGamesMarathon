@@ -23,7 +23,7 @@ let engine,
     imgObstacle;
 
 function preload() {
-    imgBackground = loadImage('src/games/goDownUnder/background.jpg');
+    imgBackground = loadImage('src/games/goDownUnder/background-rm.png');
     //imgPlayer = loadImage('src/games/goDownUnder/spongebob.png');
     imgPlayer = loadImage('src/games/goDownUnder/image (2).png');
     imgObstacle = loadImage('src/games/goDownUnder/obstacle.jpg');
