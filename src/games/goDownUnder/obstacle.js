@@ -24,7 +24,4 @@ class Obstacle {
             endShape(CLOSE);
         });
     }
-    offScreen() {
-        return this.pos.y <= -this.height;
-    }
 }

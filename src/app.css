@@ -98,3 +98,61 @@ canvas {
 .intro .continue:hover {
     background: #21707c;
 }
+
+.game-over {
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 100vh;
+    z-index: 7005;
+    background: #fff;
+    text-align: center;
+}
+
+.game-over .img {
+    max-width: 80vw;
+    max-height: 80vh;
+    text-align: center;
+    margin: auto;
+}
+
+.game-over .title {
+    position: absolute;
+    width: 100%;
+    font-family: 'Segoe UI';
+    margin-top: 100px;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    color: #062630;
+}
+
+.game-over .text {
+    position: absolute;
+    width: 100%;
+    font-family: 'Segoe UI';
+    margin-top: 170px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: #062630;
+}
+
+.game-over .try-again {
+    font-family: 'Segoe UI';
+    margin: auto;
+    background: #062630;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    width: 150px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.game-over .try-again:hover {
+    background: #21707c;
+}

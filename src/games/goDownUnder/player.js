@@ -15,17 +15,14 @@ class Player {
         imageMode(CENTER);
         translate(this.body.position.x, this.body.position.y);
         rotate(this.body.angle);
-        image(imgPlayer, 0, 0, this.r * 2-5, this.r * 2-5);
+        image(imgPlayer, 0, 0, this.r * 2 - 5, this.r * 2 - 5);
         pop();
     }
     move(dir) {
-        let force = (dir * this.body.mass);
+        let force = dir * this.body.mass;
         Body.applyForce(this.body, this.body.position, {
             x: force,
             y: 0
         });
-    }
-    gameOver() {
-        return (this.pos.y <= 0 || this.pos.y >= 500);
     }
 }

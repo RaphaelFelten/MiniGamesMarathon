@@ -6,16 +6,24 @@ const Engine = Matter.Engine,
     canvasHeight = 500,
     scoreDOM = document.getElementById('score');
 
+const defaults = {
+    score: 0,
+    vertSpeed: 3,
+    vertOff: 1,
+    playerSpeed: 0.002,
+    obstacleDistanceMax: 200
+}
+
 let engine,
-    score = 0,
-    vertSpeed = 3,
-    vertOff = 1,
+    score = defaults.score,
+    vertSpeed = defaults.vertSpeed,
+    vertOff = defaults.vertOff,
     player,
-    playerSpeed = 0.002,
+    playerSpeed = defaults.playerSpeed,
     obstacles = [],
     obstacleColor,
     obstacleDistanceMin = 80,
-    obstacleDistanceMax = 200,
+    obstacleDistanceMax = defaults.obstacleDistanceMax,
     boundLeft,
     boundRight,
     imgBackground,
@@ -31,6 +39,12 @@ document.getElementById('continue').addEventListener('click', (e) => {
 document.getElementById('start_game').addEventListener('click', (e) => {
     loop();
     e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+});
+
+// Try again - resetting the game
+document.getElementById('try_again').addEventListener('click', (e) => {
+    resetGame();
+    e.target.parentNode.style.display = 'none';
 });
 
 // preloading some assets
@@ -67,6 +81,8 @@ function draw() {
     // game over
     if (player.body.position.y + player.r <= vertOff || player.body.position.y - player.r >= vertOff + canvasHeight) {
         noLoop();
+        document.getElementById('game_over').style.display = 'block';
+        document.querySelector('#game_over .text').textContent = 'YOUR SCORE : ' + score;
     }
     player.render();
     obstacles.forEach(o => {
@@ -109,4 +125,28 @@ function draw() {
 function spawnObstacle() {
     let h = obstacles.length < 1 ? 0 : obstacles[obstacles.length - 1].bodies[0].position.y + random(obstacleDistanceMin, obstacleDistanceMax);
     obstacles.push(new Obstacle(h));
+}
+
+// Reset game
+function resetGame() {
+    score = defaults.score;
+    vertSpeed = defaults.vertSpeed;
+    vertOff = defaults.vertOff;
+    playerSpeed = defaults.playerSpeed;
+    obstacleDistanceMax = defaults.obstacleDistanceMax;
+    obstacles.forEach(o => World.remove(engine.world, o.bodies));
+    obstacles = [];
+    World.remove(engine.world, player.body);
+    player = new Player();
+    for (let i = 0; i < 5; i++) {
+        spawnObstacle();
+    }
+    World.remove(engine.world, [boundLeft, boundRight]);
+    const boundOptions = {};
+    boundOptions.isStatic = true;
+    boundLeft = Bodies.rectangle(-50, height / 2, 100, height, boundOptions);
+    boundRight = Bodies.rectangle(width + 50, height / 2, 100, height, boundOptions);
+    World.add(engine.world, [boundLeft, boundRight]);
+    scoreDOM.textContent = score;
+    loop();
 }
