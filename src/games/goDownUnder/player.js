@@ -1,6 +1,6 @@
 class Player {
     constructor() {
-        this.r = 20;
+        this.r = floor(canvasWidth / 20);
         const options = {};
         options.restitution = 0.3;
         options.friction = 0.3;
@@ -15,7 +15,7 @@ class Player {
         imageMode(CENTER);
         translate(this.body.position.x, this.body.position.y);
         rotate(this.body.angle);
-        image(imgPlayer, 0, 0, this.r * 2 - 5, this.r * 2 - 5);
+        image(imgPlayer, 0, 0, this.r * 2 - (this.r / 4), this.r * 2 - (this.r / 4));
         pop();
     }
     move(dir) {

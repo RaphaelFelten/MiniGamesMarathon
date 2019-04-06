@@ -2,17 +2,20 @@ const Engine = Matter.Engine,
     World = Matter.World,
     Bodies = Matter.Bodies,
     Body = Matter.Body,
-    canvasWidth = 400,
-    canvasHeight = 500,
-    scoreDOM = document.getElementById('score');
-
-const defaults = {
-    score: 0,
-    vertSpeed: 3,
-    vertOff: 1,
-    playerSpeed: 0.002,
-    obstacleDistanceMax: 200
-}
+    maxSize = 0.8,
+    widthR = 4,
+    heightR = 5,
+    ratio = window.innerWidth > window.innerHeight ? (window.innerHeight / heightR) * maxSize : (window.innerWidth / widthR) * maxSize,
+    canvasWidth = widthR * ratio,
+    canvasHeight = heightR * ratio,
+    scoreDOM = document.getElementById('score'),
+    defaults = {
+        score: 0,
+        vertSpeed: 3,
+        vertOff: 1,
+        playerSpeed: 0.002,
+        obstacleDistanceMax: Math.floor((widthR / 2) * ratio)
+    };
 
 let engine,
     score = defaults.score,
@@ -22,7 +25,7 @@ let engine,
     playerSpeed = defaults.playerSpeed,
     obstacles = [],
     obstacleColor,
-    obstacleDistanceMin = 80,
+    obstacleDistanceMin = Math.floor(defaults.obstacleDistanceMax / 2.5),
     obstacleDistanceMax = defaults.obstacleDistanceMax,
     boundLeft,
     boundRight,
@@ -59,6 +62,8 @@ function setup() {
     noLoop();
     let canvas = createCanvas(canvasWidth, canvasHeight);
     canvas.elt.style.left = ((window.innerWidth - canvasWidth) / 2) + 'px';
+    document.querySelector('.controls').style.width = canvasWidth + 'px';
+    document.querySelector('.controls').style.left = ((window.innerWidth - canvasWidth) / 2) + 'px';
     engine = Engine.create();
     obstacleColor = [random(1, 255), random(1, 255), random(1, 255), 70];
     const boundOptions = {};
@@ -114,12 +119,21 @@ function draw() {
         });
         vertOff += vertSpeed;
     }
+    // Move player with arrow keys
     if (keyIsDown(LEFT_ARROW)) {
         player.move(-playerSpeed);
     } else if (keyIsDown(RIGHT_ARROW)) {
         player.move(playerSpeed);
     }
 }
+
+// Move player by pressing the buttons at the bottom of the page
+document.querySelector('.controls .left').addEventListener('click', (e) => {
+    player.move(-playerSpeed);
+});
+document.querySelector('.controls .right').addEventListener('click', (e) => {
+    player.move(playerSpeed);
+});
 
 // spawn new obstacle
 function spawnObstacle() {

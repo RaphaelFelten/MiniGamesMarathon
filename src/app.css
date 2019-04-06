@@ -7,7 +7,6 @@
 
 canvas {
     position: absolute;
-    top: 50px;
 }
 
 #score {
@@ -16,10 +15,10 @@ canvas {
     left: 25%;
     height: 50px;
     line-height: 50px;
-    background: #fff;
-    color: #2e2e2e;
+    color: #fff;
     text-align: center;
     font-size: 40px;
+    z-index: 8000;
 }
 
 .start_game_ctn {
@@ -62,7 +61,7 @@ canvas {
 .intro .text {
     font-family: 'Segoe UI';
     margin: auto;
-    margin-top: 50px;
+    margin-top: 20px;
     text-align: center;
     font-size: 40px;
     font-weight: 300;
@@ -78,6 +77,10 @@ canvas {
 .intro .img {
     text-align: center;
     margin: auto;
+}
+
+.intro .img img {
+    width: 30%;
 }
 
 .intro .continue {
@@ -97,6 +100,25 @@ canvas {
 
 .intro .continue:hover {
     background: #21707c;
+}
+
+.controls {
+    width: 300px;
+    height: 20vh;
+    position: absolute;
+    top: 80vh;
+    background: #333344;
+    color: #fff;
+}
+
+.controls div {
+    float: left;
+    width: 50%;
+    font-size: 30px;
+    height: 100%;
+    line-height: 20vh;
+    text-align: center;
+    cursor: pointer;
 }
 
 .game-over {

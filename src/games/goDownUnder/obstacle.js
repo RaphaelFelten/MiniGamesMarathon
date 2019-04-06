@@ -1,12 +1,12 @@
 class Obstacle {
     constructor(_y) {
-        this.h = 30;
+        this.h = floor(canvasHeight / 16);
         this.y = _y || height + this.h / 2;
         this.gapWidth = width / 7;
-        this.gapX = floor(random(20, width - this.gapWidth - 20));
+        this.gapX = floor(random(floor(canvasWidth / 20), width - this.gapWidth - floor(canvasWidth / 20)));
         const options = {};
         options.isStatic = true;
-        options.friction = 0.3;
+        options.friction = 0.5;
         this.bodies = [];
         this.bodies.push(Bodies.rectangle(this.gapX / 2, this.y, this.gapX, this.h, options));
         this.bodies.push(Bodies.rectangle(width - ((width - this.gapX - this.gapWidth) / 2), this.y, width - this.gapX - this.gapWidth, this.h, options));
