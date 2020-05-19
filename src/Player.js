@@ -9,8 +9,8 @@ export default class Player extends Entity {
     this.image = image;
     this.width = 30;
     this.height = 30;
-    this.pos = { x: 50, y: 100 };
-    this.vel.y = -100;
+    this.pos = { x: 50, y: 300 };
+    this.vel.y = 0;
     this.acc = 50;
     this.addTrait(new Physics(this));
     this.addTrait(new Solid(this));
