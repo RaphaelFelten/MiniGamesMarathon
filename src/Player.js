@@ -11,7 +11,7 @@ export default class Player extends Entity {
     this.height = 30;
     this.pos = { x: 50, y: 300 };
     this.vel.y = 0;
-    this.acc = 50;
+    this.acc = 20;
     this.addTrait(new Physics(this));
     this.addTrait(new Solid(this));
     this.inputController = new InputController();
@@ -20,6 +20,10 @@ export default class Player extends Entity {
     });
     this.inputController.on('ArrowRight', () => {
       this.move(this.acc);
+    });
+    this.inputController.on('ArrowUp', () => {
+      this.vel.y -= 300;
+      console.log(this);
     });
   }
 
