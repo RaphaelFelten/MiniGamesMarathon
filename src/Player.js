@@ -23,7 +23,6 @@ export default class Player extends Entity {
     });
     this.inputController.on('ArrowUp', () => {
       this.vel.y -= 300;
-      console.log(this);
     });
   }
 

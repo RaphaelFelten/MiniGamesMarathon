@@ -16,7 +16,7 @@ export const setup = async (gameContext) => {
   borderLeft.addTrait(new Solid(borderLeft));
   borderLeft.width = 50;
   borderLeft.height = gameContext.canvas.height;
-  borderLeft.pos.x = -50;
+  borderLeft.pos.x = -51;
   borderLeft.pos.y = 0;
 
   const borderTop = new Entity('#000');
@@ -30,7 +30,7 @@ export const setup = async (gameContext) => {
   borderRight.addTrait(new Solid(borderRight));
   borderRight.width = 50;
   borderRight.height = gameContext.canvas.height;
-  borderRight.pos.x = gameContext.canvas.width;
+  borderRight.pos.x = gameContext.canvas.width+1;
   borderRight.pos.y = 0;
 
   const borderBottom = new Entity('#000');
