@@ -1,6 +1,6 @@
 export default class Physics {
     constructor(entity) {
-        this.gravity = 500;
+        this.gravity = 0;
         this.entity = entity;
     }
 
