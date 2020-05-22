@@ -1,5 +1,7 @@
+import * as layers from './layers.js';
 import Timer from './Timer.js';
 import World from './World.js';
+import Dashboard from './Dashboard.js';
 import * as GoDownUnder from './games/GoDownUnder/GoDownUnder.js';
 
 export default class GameRunner {
@@ -13,12 +15,15 @@ export default class GameRunner {
 
     async start() {
         this.timer = new Timer(this.frameRate);
-        this.world = new World();
-        const gameContext = { world: this.world, canvas: this.canvas, context: this.context };
+        const world = new World();
+        const dashboard = new Dashboard();
+        const gameContext = { world, canvas: this.canvas, context: this.context, dashboard };
         const setupData = await this.games[this.gameIndex].setup(gameContext);
         this.timer.update = async (deltaTime) => {
             this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            this.games[this.gameIndex].run({ ...gameContext, deltaTime }, setupData);
+            layers.drawBackground(setupData.backgroundImage, gameContext);
+            this.games[this.gameIndex].run({ ...gameContext, deltaTime, gameRunner: this }, setupData);
+            layers.drawDashBoard(gameContext);
         };
         this.timer.start();
     }

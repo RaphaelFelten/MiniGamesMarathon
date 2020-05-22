@@ -1,3 +1,5 @@
+import Rotater from "./Traits/Rotater.js";
+
 export default class Entity {
     constructor(color) {
         this.pos = { x: 0, y: 0 };
@@ -19,7 +21,11 @@ export default class Entity {
         this.sides.bottom = this.pos.y + this.height;
         this.traits.forEach((trait) => trait.update(gameContext));
         if (this.image) {
-            gameContext.context.drawImage(this.image, this.pos.x, this.pos.y, this.width, this.height);
+            if (this.hasTrait(Rotater)) {
+                this.getTrait(Rotater).update(gameContext);
+            } else {
+                gameContext.context.drawImage(this.image, this.pos.x, this.pos.y, this.width, this.height);
+            }
         } else {
             gameContext.context.fillStyle = this.color;
             gameContext.context.fillRect(this.pos.x, this.pos.y, this.width, this.height);
@@ -29,6 +35,14 @@ export default class Entity {
 
     addTrait(trait) {
         this.traits.push(trait);
+    }
+
+    hasTrait(trait) {
+        return this.traits.filter(item => item instanceof trait).length > 0;
+    }
+
+    getTrait(trait) {
+        return this.traits.filter(item => item instanceof trait)[0];
     }
 
 }

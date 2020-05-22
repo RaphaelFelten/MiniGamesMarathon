@@ -7,4 +7,8 @@ export default class World {
         this.entities.push(entity);
     }
 
+    removeEntity(entity) {
+        this.entities = this.entities.filter(ent => ent !== entity)
+    }
+
 }

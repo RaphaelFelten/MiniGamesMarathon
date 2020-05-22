@@ -1,63 +1,45 @@
-import * as layers from '../../layers.js';
 import * as loader from '../../loader.js';
-import Entity from '../../Entity.js';
+import * as utils from '../../utils.js';
+import * as entitySetup from './entitySetup.js';
+import Obstacle from '../../Traits/Obstacle.js';
 import Player from '../../Player.js';
-import Solid from '../../Traits/Solid.js';
-import Physics from '../../Traits/Physics.js';
+
+let OBSTACLE_SPEED = 0.05;
 
 export const setup = async (gameContext) => {
-  const backgroundImage = await loader.loadImage(
-    './assets/GoDownUnder/background.png'
-  );
+  const backgroundImage = await loader.loadImage('./assets/GoDownUnder/background.png');
   const playerImage = await loader.loadImage('./assets/mrpoopybutthole.png');
-  const player = new Player(playerImage);
+  const obstacleImage = await loader.loadImage('./assets/GoDownUnder/obstacle.jpg');
+  
+  entitySetup.createPlayer(playerImage, gameContext);
+  entitySetup.createObstacles(obstacleImage, OBSTACLE_SPEED, gameContext);
+  utils.createBorders(gameContext, true, false, true, false);
 
-  const borderLeft = new Entity('#000');
-  borderLeft.addTrait(new Solid(borderLeft));
-  borderLeft.width = 50;
-  borderLeft.height = gameContext.canvas.height;
-  borderLeft.pos.x = -51;
-  borderLeft.pos.y = 0;
-
-  const borderTop = new Entity('#000');
-  borderTop.addTrait(new Solid(borderTop));
-  borderTop.width = gameContext.canvas.width;
-  borderTop.height = 50;
-  borderTop.pos.x = 0;
-  borderTop.pos.y = -50;
-
-  const borderRight = new Entity('#000');
-  borderRight.addTrait(new Solid(borderRight));
-  borderRight.width = 50;
-  borderRight.height = gameContext.canvas.height;
-  borderRight.pos.x = gameContext.canvas.width+1;
-  borderRight.pos.y = 0;
-
-  const borderBottom = new Entity('#000');
-  borderBottom.addTrait(new Solid(borderBottom));
-  borderBottom.width = gameContext.canvas.width;
-  borderBottom.height = 50;
-  borderBottom.pos.x = 0;
-  borderBottom.pos.y = gameContext.canvas.height;
-
-  const rect2 = new Entity('#000');
-  rect2.addTrait(new Solid(rect2));
-  rect2.addTrait(new Physics(rect2));
-  rect2.width = 100;
-  rect2.height = 50;
-  rect2.pos.x = 200;
-  rect2.pos.y = 400;
-
-  gameContext.world.addEntity(player);
-  gameContext.world.addEntity(borderLeft);
-  gameContext.world.addEntity(borderTop);
-  gameContext.world.addEntity(borderRight);
-  gameContext.world.addEntity(borderBottom);
-  gameContext.world.addEntity(rect2);
-  return { backgroundImage, playerImage, player };
+  return { backgroundImage, obstacleImage };
 };
 
 export const run = async (gameContext, setupData) => {
-  layers.drawBackground(setupData.backgroundImage, gameContext);
-  gameContext.world.entities.forEach((entity) => entity.update(gameContext));
+  gameContext.world.entities.forEach((entity) => {
+    entity.update(gameContext);
+    if (entity.hasTrait(Obstacle)) {
+      if (entity.pos.y < 0 && !entity.getTrait(Obstacle).spawnedNew) {
+        entitySetup.spawnObstacle(setupData.obstacleImage, OBSTACLE_SPEED, gameContext.canvas.height, gameContext);
+        entity.getTrait(Obstacle).spawnedNew = true;
+        gameContext.dashboard.addScore(10);
+        if (gameContext.dashboard.score > 0 && gameContext.dashboard.score % 50 == 0) {
+          OBSTACLE_SPEED *= 1.5;
+          gameContext.world.entities.forEach(ent => ent.hasTrait(Obstacle) ? ent.getTrait(Obstacle).speed = OBSTACLE_SPEED : null);
+        }
+      }
+      if (entity.sides.bottom < 0) {
+        gameContext.world.removeEntity(entity);
+      }
+    }
+
+    if (entity instanceof Player) {
+      if (entity.sides.top < 0 || entity.sides.bottom > gameContext.canvas.height) {
+        gameContext.gameRunner.stop();
+      }
+    }
+  });
 };

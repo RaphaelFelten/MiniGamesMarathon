@@ -4,29 +4,14 @@ import Physics from './Traits/Physics.js';
 import Solid from './Traits/Solid.js';
 
 export default class Player extends Entity {
-  constructor(image) {
+  constructor(width, height, image) {
     super();
     this.image = image;
-    this.width = 30;
-    this.height = 30;
-    this.pos = { x: 50, y: 300 };
-    this.vel.y = 0;
-    this.acc = 20;
-    this.addTrait(new Physics(this));
+    this.width = width;
+    this.height = height;
     this.addTrait(new Solid(this));
+    this.addTrait(new Physics(this));
     this.inputController = new InputController();
-    this.inputController.on('ArrowLeft', () => {
-      this.move(-this.acc);
-    });
-    this.inputController.on('ArrowRight', () => {
-      this.move(this.acc);
-    });
-    this.inputController.on('ArrowUp', () => {
-      this.vel.y -= 300;
-    });
   }
 
-  move(dir) {
-    this.vel.x += dir;
-  }
 }
