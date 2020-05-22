@@ -13,6 +13,9 @@ export default class InputController {
     window.addEventListener('contextmenu', (e) => {
       e.preventDefault();
     });
+    window.addEventListener('dblclick', (e) => {
+      e.preventDefault();
+    });
     window.addEventListener('keydown', (e) => {
       e.preventDefault();
       if (this.keyStates.filter(keyState => keyState.key === e.key).length < 1) {
