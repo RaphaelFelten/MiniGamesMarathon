@@ -3,7 +3,7 @@ import Obstacle from './Obstacle.js';
 export default class Solid {
   constructor(entity) {
     this.entity = entity;
-    this.restitution = 0.5;
+    this.restitution = 0;
   }
 
   update(gameContext) {
