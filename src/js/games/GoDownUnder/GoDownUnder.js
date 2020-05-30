@@ -7,10 +7,14 @@ import Player from '../../Player.js';
 let OBSTACLE_SPEED = 0.05;
 
 export const setup = async (gameContext) => {
-  const backgroundImage = await loader.loadImage('./assets/GoDownUnder/background.png');
+  const backgroundImage = await loader.loadImage(
+    './assets/GoDownUnder/background.png'
+  );
   const playerImage = await loader.loadImage('./assets/mrpoopybutthole.png');
-  const obstacleImage = await loader.loadImage('./assets/GoDownUnder/obstacle.jpg');
-  
+  const obstacleImage = await loader.loadImage(
+    './assets/GoDownUnder/obstacle.jpg'
+  );
+
   entitySetup.createPlayer(playerImage, gameContext);
   entitySetup.createObstacles(obstacleImage, OBSTACLE_SPEED, gameContext);
   //entitySetup.spawnObstacle(obstacleImage, 0.5, gameContext.canvas.height, gameContext);
@@ -24,12 +28,24 @@ export const run = async (gameContext, setupData) => {
     entity.update(gameContext);
     if (entity.hasTrait(Obstacle)) {
       if (entity.pos.y < 0 && !entity.getTrait(Obstacle).spawnedNew) {
-        entitySetup.spawnObstacle(setupData.obstacleImage, OBSTACLE_SPEED, gameContext.canvas.height, gameContext);
+        entitySetup.spawnObstacle(
+          setupData.obstacleImage,
+          OBSTACLE_SPEED,
+          gameContext.canvas.height,
+          gameContext
+        );
         entity.getTrait(Obstacle).spawnedNew = true;
         gameContext.dashboard.addScore(10);
-        if (gameContext.dashboard.score > 0 && gameContext.dashboard.score % 50 == 0) {
-          OBSTACLE_SPEED *= 1.5;
-          gameContext.world.entities.forEach(ent => ent.hasTrait(Obstacle) ? ent.getTrait(Obstacle).speed = OBSTACLE_SPEED : null);
+        if (
+          gameContext.dashboard.score > 0 &&
+          gameContext.dashboard.score % 50 == 0
+        ) {
+          OBSTACLE_SPEED *= 1.25;
+          gameContext.world.entities.forEach((ent) =>
+            ent.hasTrait(Obstacle)
+              ? (ent.getTrait(Obstacle).speed = OBSTACLE_SPEED)
+              : null
+          );
         }
       }
       if (entity.sides.bottom < 0) {
@@ -38,7 +54,10 @@ export const run = async (gameContext, setupData) => {
     }
 
     if (entity instanceof Player) {
-      if (entity.sides.top < 0 || entity.sides.bottom > gameContext.canvas.height) {
+      if (
+        entity.sides.top < 0 ||
+        entity.sides.bottom > gameContext.canvas.height
+      ) {
         gameContext.gameRunner.stop();
       }
     }

@@ -13,5 +13,4 @@ export default class Player extends Entity {
     this.addTrait(new Physics(this));
     this.inputController = new InputController();
   }
-
 }
