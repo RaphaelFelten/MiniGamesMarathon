@@ -13,6 +13,7 @@ export const setup = async (gameContext) => {
   
   entitySetup.createPlayer(playerImage, gameContext);
   entitySetup.createObstacles(obstacleImage, OBSTACLE_SPEED, gameContext);
+  //entitySetup.spawnObstacle(obstacleImage, 0.5, gameContext.canvas.height, gameContext);
   utils.createBorders(gameContext, true, false, true, false);
 
   return { backgroundImage, obstacleImage };

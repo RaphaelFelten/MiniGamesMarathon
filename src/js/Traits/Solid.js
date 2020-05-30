@@ -3,7 +3,7 @@ import Obstacle from './Obstacle.js';
 export default class Solid {
   constructor(entity) {
     this.entity = entity;
-    this.restitution = 0.5;
+    this.restitution = 0;
   }
 
   update(gameContext) {
@@ -49,7 +49,7 @@ export default class Solid {
         }
       });
     }
-
+    console.log(this.entity.vel.y);
     if (this.entity.vel.y > 0) {
       overlapsWith.forEach((entity) => {
         if (
@@ -58,8 +58,8 @@ export default class Solid {
             this.entity.sides.top < entity.sides.top &&
             this.entity.sides.right > entity.sides.left &&
             this.entity.sides.left < entity.sides.right) ||
-          (this.entity.vel.y > entity.height / 2 &&
-            this.entity.top > entity.top)
+          (this.entity.vel.y * gameContext.deltaTime > entity.height / 2 &&
+            this.entity.bottom > entity.bottom)
         ) {
           this.entity.pos.y = entity.sides.top - this.entity.height;
           this.entity.vel.y *= -this.restitution;
