@@ -3,6 +3,7 @@ import * as utils from '../../utils.js';
 import * as entitySetup from './entitySetup.js';
 import Obstacle from '../../Traits/Obstacle.js';
 import Player from '../../Player.js';
+import Circle from '../../Circle.js';
 
 let OBSTACLE_SPEED = 0.05;
 
@@ -26,6 +27,7 @@ export const setup = async (gameContext) => {
 export const run = async (gameContext, setupData) => {
   gameContext.world.entities.forEach((entity) => {
     entity.update(gameContext);
+    entity.draw(gameContext);
     if (entity.hasTrait(Obstacle)) {
       if (entity.pos.y < 0 && !entity.getTrait(Obstacle).spawnedNew) {
         entitySetup.spawnObstacle(
@@ -55,8 +57,8 @@ export const run = async (gameContext, setupData) => {
 
     if (entity instanceof Player) {
       if (
-        entity.sides.top < 0 ||
-        entity.sides.bottom > gameContext.canvas.height
+        entity.pos.y - entity.height < 0 ||
+        entity.pos.y + entity.height > gameContext.canvas.height
       ) {
         gameContext.gameRunner.stop();
       }

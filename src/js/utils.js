@@ -1,5 +1,6 @@
 import Solid from './Traits/Solid.js';
 import Entity from './Entity.js';
+import Rectangle from './Rectangle.js';
 
 export function createBorders(
   gameContext,
@@ -9,7 +10,7 @@ export function createBorders(
   bottom = true
 ) {
   if (left) {
-    const borderLeft = new Entity('#000');
+    const borderLeft = new Rectangle();
     borderLeft.addTrait(new Solid(borderLeft));
     borderLeft.width = 50;
     borderLeft.height = gameContext.canvas.height;
@@ -19,7 +20,7 @@ export function createBorders(
   }
 
   if (top) {
-    const borderTop = new Entity('#000');
+    const borderTop = new Rectangle();
     borderTop.addTrait(new Solid(borderTop));
     borderTop.width = gameContext.canvas.width;
     borderTop.height = 50;
@@ -29,7 +30,7 @@ export function createBorders(
   }
 
   if (right) {
-    const borderRight = new Entity('#000');
+    const borderRight = new Rectangle();
     borderRight.addTrait(new Solid(borderRight));
     borderRight.width = 50;
     borderRight.height = gameContext.canvas.height;
@@ -39,7 +40,7 @@ export function createBorders(
   }
 
   if (bottom) {
-    const borderBottom = new Entity('#000');
+    const borderBottom = new Rectangle();
     borderBottom.addTrait(new Solid(borderBottom));
     borderBottom.width = gameContext.canvas.width;
     borderBottom.height = 50;

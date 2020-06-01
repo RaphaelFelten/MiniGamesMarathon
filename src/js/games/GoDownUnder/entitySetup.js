@@ -1,18 +1,16 @@
 import Player from "../../Player.js";
-import Entity from "../../Entity.js";
 import Solid from "../../Traits/Solid.js";
 import Obstacle from '../../Traits/Obstacle.js';
-import Rotater from "../../Traits/Rotater.js";
+import Rectangle from "../../Rectangle.js";
 
 const nDivisions = 12;
 
 export function createPlayer(playerImage, gameContext) {
-    const player = new Player(gameContext.canvas.width / 10, gameContext.canvas.width / 10, playerImage);
+    const player = new Player(gameContext.canvas.width / 20, playerImage);
     player.acc = gameContext.canvas.width / 3;
     player.friction = player.acc / 30;
     player.pos.x = gameContext.canvas.width / 2 - player.width / 2;
-    player.pos.y = 0;
-    player.addTrait(new Rotater(player));
+    player.pos.y = 50;
     player.inputController.on('ArrowLeft', () => {
         player.vel.x -= player.acc;
     });
@@ -33,7 +31,7 @@ export function spawnObstacle(obstacleImage, speed, y, gameContext) {
     const w = gameContext.canvas.width;
     const h = Math.floor(gameContext.canvas.height / nDivisions / 1.5);
 
-    const obstacleLeft = new Entity('#000');
+    const obstacleLeft = new Rectangle();
     obstacleLeft.pos.y = y;
     obstacleLeft.width = Math.floor(Math.random() * w - spaceWidth);
     obstacleLeft.height = h;
@@ -43,7 +41,7 @@ export function spawnObstacle(obstacleImage, speed, y, gameContext) {
     obstacleLeft.getTrait(Obstacle).spawnedNew = true;
     gameContext.world.addEntity(obstacleLeft);
 
-    const obstacleRight = new Entity('#000');
+    const obstacleRight = new Rectangle();
     obstacleRight.pos.y = y;
     obstacleRight.pos.x = obstacleLeft.width > 0 ? obstacleLeft.width + spaceWidth : spaceWidth;
     obstacleRight.width = w;
