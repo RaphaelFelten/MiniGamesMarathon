@@ -33,7 +33,8 @@ export function spawnObstacle(obstacleImage, speed, y, gameContext) {
 
     const obstacleLeft = new Rectangle();
     obstacleLeft.pos.y = y;
-    obstacleLeft.width = Math.floor(Math.random() * w - spaceWidth);
+    obstacleLeft.pos.x = -w * 3;
+    obstacleLeft.width = w * 3 + (Math.floor(Math.random() * w - spaceWidth));
     obstacleLeft.height = h;
     obstacleLeft.image = obstacleImage;
     obstacleLeft.addTrait(new Solid(obstacleLeft));
@@ -43,11 +44,12 @@ export function spawnObstacle(obstacleImage, speed, y, gameContext) {
 
     const obstacleRight = new Rectangle();
     obstacleRight.pos.y = y;
-    obstacleRight.pos.x = obstacleLeft.width > 0 ? obstacleLeft.width + spaceWidth : spaceWidth;
-    obstacleRight.width = w;
+    obstacleRight.pos.x = obstacleLeft.pos.x + obstacleLeft.width + spaceWidth;
+    obstacleRight.width = w * 3;
     obstacleRight.height = h;
     obstacleRight.image = obstacleImage;
     obstacleRight.addTrait(new Solid(obstacleRight));
     obstacleRight.addTrait(new Obstacle(obstacleRight, speed));
+    obstacleRight.getTrait(Obstacle).obstacleLeft = obstacleLeft;
     gameContext.world.addEntity(obstacleRight);
 }
