@@ -22,6 +22,7 @@ export default class Obstacle {
                 this.frameCountDirChange--;
             }
         }
+        
         this.entity.pos.y += -gameContext.canvas.height * this.speed * gameContext.deltaTime;
     }
 

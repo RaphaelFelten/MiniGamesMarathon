@@ -3,6 +3,7 @@ import Timer from './Timer.js';
 import World from './World.js';
 import Dashboard from './Dashboard.js';
 import * as GoDownUnder from './games/GoDownUnder/GoDownUnder.js';
+import * as TheMiddleLane from './games/TheMiddleLane/TheMiddleLane.js';
 
 export default class GameRunner {
     constructor(canvas) {
@@ -10,7 +11,7 @@ export default class GameRunner {
         this.frameRate = 1/60;
         this.canvas = canvas;
         this.context = canvas.getContext('2d');
-        this.games = [GoDownUnder];
+        this.games = [GoDownUnder, TheMiddleLane];
     }
 
     async start() {

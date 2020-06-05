@@ -2,11 +2,15 @@ import Player from "../../Player.js";
 import Solid from "../../Traits/Solid.js";
 import Obstacle from '../../Traits/Obstacle.js';
 import Rectangle from "../../Rectangle.js";
+import Rotater from "../../Traits/Rotater.js";
+import Physics from "../../Traits/Physics.js";
 
 const nDivisions = 12;
 
 export function createPlayer(playerImage, gameContext) {
     const player = new Player(gameContext.canvas.width / 20, playerImage);
+    player.addTrait(new Rotater(player));
+    player.addTrait(new Physics(player));
     player.acc = gameContext.canvas.width / 3;
     player.friction = player.acc / 30;
     player.pos.x = gameContext.canvas.width / 2 - player.width / 2;

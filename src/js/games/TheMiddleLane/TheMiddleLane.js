@@ -8,18 +8,18 @@ let OBSTACLE_SPEED = 0.05;
 
 export const setup = async (gameContext) => {
   const backgroundImage = await loader.loadImage(
-    './assets/GoDownUnder/background.png'
+    './assets/TheMiddleLane/background.jpg'
   );
-  const playerImage = await loader.loadImage('./assets/GoDownUnder/mrpoopybutthole.png');
+  const playerImage = await loader.loadImage('./assets/TheMiddleLane/rocket.png');
   const obstacleImage = await loader.loadImage(
-    './assets/GoDownUnder/obstacle.jpg'
+    './assets/TheMiddleLane/obstacle.jpg'
   );
 
   entitySetup.createPlayer(playerImage, gameContext);
   entitySetup.createObstacles(obstacleImage, OBSTACLE_SPEED, gameContext);
-  utils.createBorders(gameContext, true, false, true, false);
+  utils.createBorders(gameContext);
 
-  return { backgroundImage, obstacleImage };
+  return { backgroundImage };
 };
 
 export const run = async (gameContext, setupData) => {
@@ -27,7 +27,9 @@ export const run = async (gameContext, setupData) => {
     entity.update(gameContext);
     entity.draw(gameContext);
     if (entity.hasTrait(Obstacle)) {
-      if (entity.pos.y < 0 && !entity.getTrait(Obstacle).spawnedNew) {
+      //console.log(entity.pos.y);
+      if (entity.pos.y > gameContext.canvas.height && !entity.getTrait(Obstacle).spawnedNew) {
+        console.log('spawn new');
         entitySetup.spawnObstacle(
           setupData.obstacleImage,
           OBSTACLE_SPEED,
@@ -48,17 +50,8 @@ export const run = async (gameContext, setupData) => {
           );
         }
       }
-      if (entity.sides.bottom < 0) {
+      if (entity.sides.top > gameContext.canvas.height + entity.height ) {
         gameContext.world.removeEntity(entity);
-      }
-    }
-
-    if (entity instanceof Player) {
-      if (
-        entity.pos.y - entity.height < 0 ||
-        entity.pos.y + entity.height > gameContext.canvas.height
-      ) {
-        gameContext.gameRunner.runNext();
       }
     }
   });

@@ -20,6 +20,7 @@ export default class Solid {
     const overlapsWith = gameContext.world.entities.filter(
       (entity) => this.overlap(entity) && entity.hasTrait(Solid)
     );
+    
     if (overlapsWith.length < 1) {
       return;
     }

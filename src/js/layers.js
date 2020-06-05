@@ -1,5 +1,5 @@
 export const drawBackground = (image, gameContext) => {
-    gameContext.context.drawImage(image, 0, 0, image.width, gameContext.canvas.height);
+    gameContext.context.drawImage(image, -image.width / 2, 0, image.width, gameContext.canvas.height);
 }
 
 export const drawDashBoard = (gameContext) => {

@@ -2,14 +2,6 @@ export default class InputController {
   constructor() {
     this.queue = [];
     this.keyStates = [];
-    document.getElementById('left').addEventListener('mousedown', (e) => {
-      e.preventDefault();
-      this.emit('ArrowLeft');
-    });
-    document.getElementById('right').addEventListener('mousedown', (e) => {
-      e.preventDefault();
-      this.emit('ArrowRight');
-    });
     window.addEventListener('contextmenu', (e) => {
       e.preventDefault();
     });
@@ -30,6 +22,44 @@ export default class InputController {
     window.addEventListener('keyup', (e) => {
       this.keyStates.forEach((keyState) => {
         if (e.key === keyState.key) {
+          return keyState.state = 0;
+        }
+      });
+    });
+    document.getElementById('left').addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      if (this.keyStates.filter(keyState => keyState.key === 'ArrowLeft').length < 1) {
+        return this.keyStates.push({ key: 'ArrowLeft', state: 1});
+      }
+      this.keyStates.forEach((keyState) => {
+        if (keyState.key === 'ArrowLeft') {
+          return keyState.state = 1;
+        }
+      });
+    });
+    document.getElementById('right').addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      if (this.keyStates.filter(keyState => keyState.key === 'ArrowRight').length < 1) {
+        return this.keyStates.push({ key: 'ArrowRight', state: 1});
+      }
+      this.keyStates.forEach((keyState) => {
+        if (keyState.key === 'ArrowRight') {
+          return keyState.state = 1;
+        }
+      });
+    });
+    document.getElementById('left').addEventListener('mouseup', (e) => {
+      e.preventDefault();
+      this.keyStates.forEach((keyState) => {
+        if (keyState.key === 'ArrowLeft') {
+          return keyState.state = 0;
+        }
+      });
+    });
+    document.getElementById('right').addEventListener('mouseup', (e) => {
+      e.preventDefault();
+      this.keyStates.forEach((keyState) => {
+        if (keyState.key === 'ArrowRight') {
           return keyState.state = 0;
         }
       });
