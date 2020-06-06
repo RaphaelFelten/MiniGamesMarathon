@@ -23,6 +23,7 @@ export default class Physics {
         } else if (Math.ceil(this.entity.vel.x) < 0) {
             this.entity.vel.x += this.entity.friction * gameContext.deltaTime;
         }
+
     }
 
 }

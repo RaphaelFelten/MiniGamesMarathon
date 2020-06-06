@@ -11,7 +11,7 @@ export default class GameRunner {
         this.frameRate = 1/60;
         this.canvas = canvas;
         this.context = canvas.getContext('2d');
-        this.games = [GoDownUnder, TheMiddleLane];
+        this.games = [TheMiddleLane, GoDownUnder];
     }
 
     async start() {

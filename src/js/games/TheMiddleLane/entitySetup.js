@@ -11,7 +11,7 @@ export function createPlayer(playerImage, gameContext) {
     player.acc = gameContext.canvas.width / 1.5;
     player.friction = 500;
     player.pos.x = gameContext.canvas.width / 2 - player.width / 2;
-    player.pos.y = gameContext.canvas.height - gameContext.canvas.width / 20;
+    player.pos.y = gameContext.canvas.height - player.height * 3;
     player.inputController.on('ArrowLeft', () => {
         player.vel.x -= player.acc;
     });
