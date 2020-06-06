@@ -26,7 +26,7 @@ export default class InputController {
         }
       });
     });
-    document.getElementById('left').addEventListener('mousedown', (e) => {
+    document.getElementById('left').addEventListener('touchstart', (e) => {
       e.preventDefault();
       if (this.keyStates.filter(keyState => keyState.key === 'ArrowLeft').length < 1) {
         return this.keyStates.push({ key: 'ArrowLeft', state: 1});
@@ -37,7 +37,7 @@ export default class InputController {
         }
       });
     });
-    document.getElementById('right').addEventListener('mousedown', (e) => {
+    document.getElementById('right').addEventListener('touchstart', (e) => {
       e.preventDefault();
       if (this.keyStates.filter(keyState => keyState.key === 'ArrowRight').length < 1) {
         return this.keyStates.push({ key: 'ArrowRight', state: 1});
@@ -48,7 +48,7 @@ export default class InputController {
         }
       });
     });
-    document.getElementById('left').addEventListener('mouseup', (e) => {
+    document.getElementById('left').addEventListener('touchend', (e) => {
       e.preventDefault();
       this.keyStates.forEach((keyState) => {
         if (keyState.key === 'ArrowLeft') {
@@ -56,7 +56,7 @@ export default class InputController {
         }
       });
     });
-    document.getElementById('right').addEventListener('mouseup', (e) => {
+    document.getElementById('right').addEventListener('touchend', (e) => {
       e.preventDefault();
       this.keyStates.forEach((keyState) => {
         if (keyState.key === 'ArrowRight') {
