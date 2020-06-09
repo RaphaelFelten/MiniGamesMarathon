@@ -1,8 +1,8 @@
-import Solid from "./Solid.js";
+import Player from "../Player.js";
 
 export default class Physics {
     constructor(entity) {
-        this.gravity = 1000;
+        this.gravity = 1250;
         this.entity = entity;
     }
 
@@ -18,10 +18,12 @@ export default class Physics {
             this.entity.vel.x -= this.gravity * gameContext.deltaTime;
         }
         
-        if (Math.floor(this.entity.vel.x) > 0) {
-            this.entity.vel.x -= this.entity.friction * gameContext.deltaTime;
-        } else if (Math.ceil(this.entity.vel.x) < 0) {
-            this.entity.vel.x += this.entity.friction * gameContext.deltaTime;
+        if (!gameContext.world.entities.filter(ent => ent instanceof Player)[0].inputController.isActive()) {
+            if (Math.floor(this.entity.vel.x) > 0 && this.entity.pos.x < center) {
+                this.entity.vel.x -= this.entity.friction * gameContext.deltaTime;
+            } else if (Math.ceil(this.entity.vel.x) < 0  && this.entity.pos.x > center) {
+                this.entity.vel.x += this.entity.friction * gameContext.deltaTime;
+            }
         }
 
     }

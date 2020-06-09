@@ -22,7 +22,9 @@ export default class GameRunner {
         const setupData = await this.games[this.gameIndex].setup(gameContext);
         this.timer.update = async (deltaTime) => {
             this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            layers.drawBackground(setupData.backgroundImage, gameContext);
+            if (setupData.backgroundImage) {
+                layers.drawBackground(setupData.backgroundImage, { ...gameContext, deltaTime });
+            }
             this.games[this.gameIndex].run({ ...gameContext, deltaTime, gameRunner: this }, setupData);
             layers.drawDashBoard(gameContext);
         };

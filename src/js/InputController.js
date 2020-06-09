@@ -86,4 +86,8 @@ export default class InputController {
   on(key, callback) {
     this.queue.push({ key, callback });
   }
+
+  isActive() {
+    return this.keyStates.filter((keyState) => keyState.state === 1).length > 0;
+  }
 }

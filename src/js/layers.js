@@ -1,5 +1,13 @@
+let backgroundPosition = 0;
+
 export const drawBackground = (image, gameContext) => {
-    gameContext.context.drawImage(image, -image.width / 2, 0, image.width, gameContext.canvas.height);
+    if (backgroundPosition >= image.height) {
+        backgroundPosition = 0;
+    } else {
+        backgroundPosition += gameContext.deltaTime * 30;
+    }
+    gameContext.context.drawImage(image, -image.width / 2, backgroundPosition - image.height, image.width, image.height);
+    gameContext.context.drawImage(image, -image.width / 2, backgroundPosition, image.width, image.height);
 }
 
 export const drawDashBoard = (gameContext) => {
