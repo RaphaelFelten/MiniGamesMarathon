@@ -1,13 +1,15 @@
 import Player from "../../Player.js";
 import MiddlePhysics from "../../Traits/MiddlePhysics.js";
+import Collider from "../../Traits/Collider.js";
 import Obstacle from '../../Traits/Obstacle.js';
 import Rectangle from "../../Rectangle.js";
 
-const nDivisions = 10;
+const nDivisions = 8;
 
 export function createPlayer(playerImage, gameContext) {
     const player = new Player(gameContext.canvas.width / 20, playerImage);
     player.addTrait(new MiddlePhysics(player));
+    player.addTrait(new Collider(player));
     player.acc = gameContext.canvas.width / 1.75;
     player.friction = 500;
     player.pos.x = gameContext.canvas.width / 2 - player.width / 2;

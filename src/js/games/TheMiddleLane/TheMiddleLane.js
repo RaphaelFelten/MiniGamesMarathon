@@ -1,6 +1,7 @@
 import * as loader from '../../loader.js';
 import * as entitySetup from './entitySetup.js';
 import Obstacle from '../../Traits/Obstacle.js';
+import Collider from "../../Traits/Collider.js";
 import Player from '../../Player.js';
 
 let OBSTACLE_SPEED = 0.1;
@@ -52,6 +53,9 @@ export const run = async (gameContext, setupData) => {
     }
     if (entity instanceof Player) {
       if (entity.pos.x < 0 || entity.pos.x > gameContext.canvas.width) {
+        gameContext.gameRunner.runNext();
+      }
+      if (entity.getTrait(Collider).collide(gameContext).length > 0) {
         gameContext.gameRunner.runNext();
       }
     }

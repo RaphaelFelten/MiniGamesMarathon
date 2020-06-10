@@ -4,7 +4,7 @@ import * as entitySetup from './entitySetup.js';
 import Obstacle from '../../Traits/Obstacle.js';
 import Player from '../../Player.js';
 
-let OBSTACLE_SPEED = 0.05;
+let OBSTACLE_SPEED = 0.1;
 
 export const setup = async (gameContext) => {
   const backgroundImage = await loader.loadImage(
@@ -40,7 +40,7 @@ export const run = async (gameContext, setupData) => {
           gameContext.dashboard.score > 0 &&
           gameContext.dashboard.score % 50 == 0
         ) {
-          OBSTACLE_SPEED *= 1.25;
+          OBSTACLE_SPEED *= 1.1;
           gameContext.world.entities.forEach((ent) =>
             ent.hasTrait(Obstacle)
               ? (ent.getTrait(Obstacle).speed = OBSTACLE_SPEED)
