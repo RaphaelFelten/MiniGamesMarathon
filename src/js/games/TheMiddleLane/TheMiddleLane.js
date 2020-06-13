@@ -7,7 +7,7 @@ import Player from '../../Player.js';
 let OBSTACLE_SPEED = 0.1;
 
 export const setup = async (gameContext) => {
-  const titleScreenJson = await loader.loadJson('/src/js/games/TheMiddleLane/titleScreen.json');
+  const titleScreenJson = await loader.loadJson('src\\js\\games\\TheMiddleLane\\titleScreen.json');
   const backgroundImage = await loader.loadImage(
     './assets/TheMiddleLane/background.png'
   );
