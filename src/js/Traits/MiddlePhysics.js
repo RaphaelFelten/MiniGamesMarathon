@@ -2,7 +2,7 @@ import Player from "../Player.js";
 
 export default class Physics {
     constructor(entity) {
-        this.gravity = 1000;
+        this.gravity = 500;
         this.entity = entity;
     }
 

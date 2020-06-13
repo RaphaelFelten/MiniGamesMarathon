@@ -26,7 +26,7 @@ export function createPlayer(playerImage, gameContext) {
 
 export function createObstacles(obstacleImage, speed, gameContext) {  
     for (let i = 0; i < nDivisions / 2; i++) {
-        spawnObstacle(obstacleImage, speed, (i + 1) * gameContext.canvas.height / nDivisions * 2, gameContext);
+        spawnObstacle(obstacleImage, speed, gameContext.canvas.height / 4 +  ((i + 1) * gameContext.canvas.height / nDivisions * 2), gameContext);
     }
 }
 

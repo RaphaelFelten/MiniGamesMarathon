@@ -9,6 +9,7 @@ export default class Entity {
         this.acc = 0;
         this.friction = 0;
         this.image = null;
+        this.nSpriteSheetDivisions = null;
         this.traits = [];
         this.color = color;
     }

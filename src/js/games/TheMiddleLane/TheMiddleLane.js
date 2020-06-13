@@ -7,6 +7,7 @@ import Player from '../../Player.js';
 let OBSTACLE_SPEED = 0.1;
 
 export const setup = async (gameContext) => {
+  const titleScreenJson = await loader.loadJson('/src/js/games/TheMiddleLane/titleScreen.json');
   const backgroundImage = await loader.loadImage(
     './assets/TheMiddleLane/background.png'
   );
@@ -18,7 +19,7 @@ export const setup = async (gameContext) => {
   entitySetup.createPlayer(playerImage, gameContext);
   entitySetup.createObstacles(obstacleImage, OBSTACLE_SPEED, gameContext);
 
-  return { backgroundImage, obstacleImage };
+  return { backgroundImage, obstacleImage, titleScreenJson };
 };
 
 export const run = async (gameContext, setupData) => {

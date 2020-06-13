@@ -7,6 +7,7 @@ import Player from '../../Player.js';
 let OBSTACLE_SPEED = 0.1;
 
 export const setup = async (gameContext) => {
+  const titleScreenJson = await loader.loadJson('/src/js/games/GoDownUnder/titleScreen.json');
   const backgroundImage = await loader.loadImage(
     './assets/GoDownUnder/background.png'
   );
@@ -19,7 +20,7 @@ export const setup = async (gameContext) => {
   entitySetup.createObstacles(obstacleImage, OBSTACLE_SPEED, gameContext);
   utils.createBorders(gameContext, true, false, true, false);
 
-  return { backgroundImage, obstacleImage };
+  return { backgroundImage, obstacleImage, titleScreenJson };
 };
 
 export const run = async (gameContext, setupData) => {
@@ -40,7 +41,7 @@ export const run = async (gameContext, setupData) => {
           gameContext.dashboard.score > 0 &&
           gameContext.dashboard.score % 50 == 0
         ) {
-          OBSTACLE_SPEED *= 1.1;
+          OBSTACLE_SPEED *= 1.05;
           gameContext.world.entities.forEach((ent) =>
             ent.hasTrait(Obstacle)
               ? (ent.getTrait(Obstacle).speed = OBSTACLE_SPEED)
