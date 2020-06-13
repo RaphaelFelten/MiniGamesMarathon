@@ -3,7 +3,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Lucida Console';
+}
+
+canvas {
+    image-rendering: crisp-edges;
+    image-rendering: -moz-crisp-edges;
 }
 
 #screen_ctn {
@@ -15,6 +19,7 @@
 }
 
 #controls {
+    display: none;
     width: 100%;
     height: 100vh;
     position: absolute;

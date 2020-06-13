@@ -68,3 +68,11 @@ export function wrapText(context, text, x, y, maxWidth, lineHeight) {
   }
   context.fillText(line, x, y);
 }
+
+export function enableMobileControls() {
+  document.getElementById('controls').style.display = 'block';
+}
+
+export function disableMobileControls() {
+  document.getElementById('controls').style.display = 'none';
+}

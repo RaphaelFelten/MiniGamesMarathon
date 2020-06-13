@@ -1,4 +1,4 @@
-import { wrapText } from './utils.js';
+import * as utils from './utils.js';
 import * as layers from './layers.js';
 
 export default class TitleScreen {
@@ -28,15 +28,15 @@ export default class TitleScreen {
             this.gameContext.context.font = 'bold 45px Segoe UI';
             this.gameContext.context.fillText(this.title, this.gameContext.canvas.width / 2, this.gameContext.canvas.height / 10);
             
-            this.gameContext.context.font = '25px Segoe UI';
-            wrapText(this.gameContext.context, this.description, this.gameContext.canvas.width / 2, this.gameContext.canvas.height / 5, this.gameContext.canvas.width * 0.9, 30);
+            this.gameContext.context.font = '20px Segoe UI';
+            utils.wrapText(this.gameContext.context, this.description, this.gameContext.canvas.width / 2, this.gameContext.canvas.height / 5, this.gameContext.canvas.width * 0.9, 30);
 
             this.gameContext.context.fillStyle = '#1177bb';
             this.gameContext.context.fillRect(this.buttonX, this.buttonY, this.buttonW, this.buttonH);
 
             this.gameContext.context.fillStyle = '#fff';
-            this.gameContext.context.font = 'bold 50px Segoe UI';
-            this.gameContext.context.fillText('PLAY', this.gameContext.canvas.width / 2, this.buttonY + this.buttonH / 1.4);
+            this.gameContext.context.font = 'bold 40px Segoe UI';
+            this.gameContext.context.fillText('PLAY', this.gameContext.canvas.width / 2, this.buttonY + this.buttonH / 1.45);
 
             window.addEventListener('click', (e) => {
                 if (e.clientX > this.buttonX &&
@@ -48,11 +48,12 @@ export default class TitleScreen {
                         this.gameContext.context.fillRect(this.buttonX, this.buttonY, this.buttonW, this.buttonH);
                         
                         this.gameContext.context.fillStyle = '#fff';
-                        this.gameContext.context.font = 'bold 50px Segoe UI';
-                        this.gameContext.context.fillText('PLAY', this.gameContext.canvas.width / 2, this.buttonY + this.buttonH / 1.4);
+                        this.gameContext.context.font = 'bold 40px Segoe UI';
+                        this.gameContext.context.fillText('PLAY', this.gameContext.canvas.width / 2, this.buttonY + this.buttonH / 1.45);
                         
                          setTimeout(() => {
                             resolve();
+                            window.removeEventListener('click', null);
                         }, 250);
                     }
             });

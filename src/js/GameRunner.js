@@ -1,4 +1,5 @@
 import * as layers from './layers.js';
+import * as utils from './utils.js';
 import Timer from './Timer.js';
 import World from './World.js';
 import Dashboard from './Dashboard.js';
@@ -23,6 +24,7 @@ export default class GameRunner {
         const setupData = await this.games[this.gameIndex].setup(gameContext);
         const titleScreen = new TitleScreen(setupData.titleScreenJson, setupData.backgroundImage, gameContext);
         await titleScreen.draw();
+        utils.enableMobileControls();
         this.timer.update = async (deltaTime) => {
             this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
             if (setupData.backgroundImage) {
@@ -46,6 +48,7 @@ export default class GameRunner {
     }
 
     stop() {
+        utils.disableMobileControls();
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.timer.update = null;
         this.timer = null;
